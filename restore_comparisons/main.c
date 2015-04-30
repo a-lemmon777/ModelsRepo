@@ -13,6 +13,6 @@ int main(int argc, char* argv[]) {
   while (getline(&line, (size_t*) &size, stdin) > 0) {
     printf("%s\n", restore_comparisons(line));
   }
-
+	free(line);
   return 0;
 }

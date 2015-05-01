@@ -10,7 +10,6 @@ bool checkForEncoding(char* inputString, int startIndex, const char* encoding);
 
 char* restore_comparisons(char* str) {
   int inputLength = strlen(str);
-	//int inputLength = 5;
 	char* toReturn = calloc(inputLength + 1, sizeof(char)); // Need one more space for null character
 	int resultLength = replace_comparisons(str, toReturn); // Includes the null character
 	toReturn = realloc(toReturn, resultLength * sizeof(char)); // Shrinks the memory allocated to fit the data.
@@ -34,7 +33,7 @@ int replace_comparisons(char* inputString, char* resultString) {
 }
 
 int getNextSymbol(char* inputString, int startIndex, char* resultSymbol) {
-	// encodings and their corresponding symbols, add more if you want and be sure to update numberofEncodings to match!
+	// encodings and their corresponding symbols, add more if you want and be sure to update numberOfEncodings to match!
 	int numberOfEncodings = 2;
 	const char* encodings[] = {"&lt;", "&gt;"};
 	const char translatedSymbols[] = {'<', '>'};
@@ -50,14 +49,25 @@ int getNextSymbol(char* inputString, int startIndex, char* resultSymbol) {
 	
 	if (found) {
 		*resultSymbol = translatedSymbols[counter];
-		return strlen(encodings[counter]);
+		return strlen(encodings[counter]); // return length of the encoding
 	} else {
-		*resultSymbol = inputString[startIndex];
+		*resultSymbol = inputString[startIndex]; // pass out the unencoded character
 		return 1;
 	}
 }
 
 bool checkForEncoding(char* inputString, int startIndex, const char* encoding) {
 	// Gets the index of the last relevant char in the string (before the terminating null character)
-	return true;
+	int inputLength = strlen(inputString);
+	int encodingLength = strlen(encoding);
+	int inputIndex = startIndex;
+	int encodingIndex = 0;
+	while (inputIndex < inputLength && encodingIndex < encodingLength) {
+		if (inputString[inputIndex] != encoding[encodingIndex]) {
+			return false;
+		}
+		inputIndex++;
+		encodingIndex++;
+	}
+	return encodingIndex == encodingLength; // only true if we've matched the entire encoding
 }

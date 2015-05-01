@@ -47,18 +47,21 @@ public class LineReverser {
     }
 
     private void reverseLineList() {
-    	for (int i = 0; i < lines.size(); i++) {
-    		moveLine(i);
-    	}
+//    	for (int i = 0; i < lines.size(); i++) {
+//    		moveLine(i);
+//    	}
 //        for (int i=lines.size(); i>0; --i) {
 //            moveLine(i);
 //        }
+    	for (String line : lines) {
+    		reversedLines.add(0, line);
+    	}
     }
 
-    private void moveLine(int i) {
-    	reversedLines.add(lines.get(i));
-//        reversedLines.add(lines.get(i-1));
-    }
+//    private void moveLine(int i) {
+////    	reversedLines.add(lines.get(i));
+////        reversedLines.add(lines.get(i-1));
+//    }
 
     private void saveToFile() throws IOException {
         PrintWriter writer = new PrintWriter(new FileWriter(fileName + ".reversed"));

@@ -11,64 +11,52 @@ import java.util.Scanner;
 
 public class LineReverser {
 
-    private List<String> lines;
-    private List<String> reversedLines;
-    private String fileName;
+	private List<String> lines;
+	private List<String> reversedLines;
+	private String fileName;
 
-    private LineReverser(String fileName) {
-        this.fileName = fileName;
-    }
+	private LineReverser(String fileName) {
+		this.fileName = fileName;
+	}
 
-    public static void reverseLines(String fileName) throws IOException {
-        LineReverser reverser = new LineReverser(fileName);
-        reverser.reverseLinez();
-        reverser.saveToFile();
-    }
+	public static void reverseLines(String fileName) throws IOException {
+		LineReverser reverser = new LineReverser(fileName);
+		reverser.reverseLines();
+		reverser.saveToFile();
+	}
 
-    private void reverseLinez() throws FileNotFoundException {
-        Scanner scanner = readLines();
-        reversedLines = new LinkedList<String>();
-        reverseLineList();
-        scanner.close();
-    }
+	private void reverseLines() throws FileNotFoundException {
+		Scanner scanner = readLines();
+		reversedLines = new LinkedList<String>();
+		reverseLineList();
+		scanner.close();
+	}
 
-    private Scanner readLines() throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File(fileName));
-        lines = new LinkedList<String>();
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            addLine(line);
-        }
-        return scanner;
-    }
+	private Scanner readLines() throws FileNotFoundException {
+		Scanner scanner = new Scanner(new File(fileName));
+		lines = new LinkedList<String>();
+		while (scanner.hasNextLine()) {
+			String line = scanner.nextLine();
+			addLine(line);
+		}
+		return scanner;
+	}
 
-    private void addLine(String line) {
-        lines.add(line);
-    }
+	private void addLine(String line) {
+		lines.add(line);
+	}
 
-    private void reverseLineList() {
-//    	for (int i = 0; i < lines.size(); i++) {
-//    		moveLine(i);
-//    	}
-//        for (int i=lines.size(); i>0; --i) {
-//            moveLine(i);
-//        }
-    	for (String line : lines) {
-    		reversedLines.add(0, line);
-    	}
-    }
+	private void reverseLineList() {
+		for (String line : lines) {
+			reversedLines.add(0, line);
+		}
+	}
 
-//    private void moveLine(int i) {
-////    	reversedLines.add(lines.get(i));
-////        reversedLines.add(lines.get(i-1));
-//    }
-
-    private void saveToFile() throws IOException {
-        PrintWriter writer = new PrintWriter(new FileWriter(fileName + ".reversed"));
-        for (String line : reversedLines) {
-            writer.println(line);
-        }
-        writer.close();
-    }
-
+	private void saveToFile() throws IOException {
+		PrintWriter writer = new PrintWriter(new FileWriter(fileName + ".reversed"));
+		for (String line : reversedLines) {
+			writer.println(line);
+		}
+		writer.close();
+	}
 }

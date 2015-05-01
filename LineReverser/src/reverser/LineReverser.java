@@ -21,11 +21,11 @@ public class LineReverser {
 
     public static void reverseLines(String fileName) throws IOException {
         LineReverser reverser = new LineReverser(fileName);
-        reverser.reverseLines();
+        reverser.reverseLinez();
         reverser.saveToFile();
     }
 
-    private void reverseLines() throws FileNotFoundException {
+    private void reverseLinez() throws FileNotFoundException {
         Scanner scanner = readLines();
         reversedLines = new LinkedList<String>();
         reverseLineList();
@@ -47,13 +47,17 @@ public class LineReverser {
     }
 
     private void reverseLineList() {
-        for (int i=lines.size(); i>0; --i) {
-            moveLine(i);
-        }
+    	for (int i = 0; i < lines.size(); i++) {
+    		moveLine(i);
+    	}
+//        for (int i=lines.size(); i>0; --i) {
+//            moveLine(i);
+//        }
     }
 
     private void moveLine(int i) {
-        reversedLines.add(lines.get(i-1));
+    	reversedLines.add(lines.get(i));
+//        reversedLines.add(lines.get(i-1));
     }
 
     private void saveToFile() throws IOException {
